@@ -8,7 +8,6 @@ resource "aws_vpc" "main" {
 
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "my-unique-bucket-name-123-noushad" # Replace with a globally unique name
-  region = "us-west-2"
 }
 
 terraform {
