@@ -32,6 +32,36 @@ resource "aws_subnet" "private" {
     Name = "private-subnet"
   }
 }
+
+# Internet Gateway for Public Subnet
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "main-igw"
+  }
+}
+
+# Route Table for Public Subnet
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+
+  tags = {
+    Name = "public-rt"
+  }
+}
+
+# Associate Route Table with Public Subnet
+resource "aws_route_table_association" "public" {
+  subnet_id      = aws_subnet.public.id
+  route_table_id = aws_route_table.public.id
+}
+
 terraform {
   backend "s3" {
     bucket         = "my-terraform-state-bucket-noushad2"  # Replace with your state bucket name
