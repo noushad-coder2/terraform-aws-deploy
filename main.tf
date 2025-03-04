@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "my_bucket" {
 
 terraform {
   backend "s3" {
-    bucket         = "my-terraform-state-bucket"  # Replace with your state bucket name
+    bucket         = "my-terraform-state-bucket-noushad"  # Replace with your state bucket name
     key            = "terraform.tfstate"
     region         = "us-east-1"                  # Match your region
     dynamodb_table = "terraform-locks"            # Replace with your DynamoDB table name
